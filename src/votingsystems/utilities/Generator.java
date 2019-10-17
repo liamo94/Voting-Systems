@@ -21,7 +21,7 @@ public class Generator {
 			votes.add("ABCDEF");
 		for(int n = 0; n < 2000; n++)
 			votes.add("BCDEAF");
-		for(int n = 0; n < 2000; n++)
+		for(int n = 0; n < 20000; n++)
 			votes.add("CEDABF");
 		for(int n = 0; n < 900; n++)
 			votes.add("CEBDAF");

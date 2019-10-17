@@ -4,8 +4,8 @@ import java.util.List;
 
 public abstract class VotingSystem {
 	
-	abstract void run();
-	abstract String returnWinner();
-	abstract List<String> returnOrder();
+	public abstract void run();
+	public abstract String returnWinner();
+	public abstract List<String> returnOrder();
 
 }
