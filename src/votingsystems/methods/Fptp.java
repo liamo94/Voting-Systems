@@ -1,15 +1,14 @@
 package votingsystems.methods;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.TreeMap;
+import java.util.Map.Entry;
 
 import votingsystems.utilities.Generator;
+import votingsystems.utilities.Sorting;
 
 /**
  * Implementation for the First-Past-The-Post voting system
@@ -19,37 +18,44 @@ import votingsystems.utilities.Generator;
  */
 public class Fptp extends VotingSystem {
 	
-	Generator generator;
-	List<Integer> scores = new ArrayList<>();
-	Map<String, Integer> results = new HashMap<>();
+	private Generator generator;
+	private Map<String, Integer> scores = new HashMap<>();
+	private Map<Character, Integer> results = new HashMap<>();
+	private char winner;
 	
 	public Fptp(Generator generator) {
 		this.generator = generator;
+		this.scores = this.generator.createTest();
 	}
 	
 	public void run() {
-		System.out.println(Arrays.asList(generator.createTest1()));
 		calculateScores();
 		System.out.println(results);
 	}
 	
-	public String returnWinner() {
-		return null;
+	public char returnWinner() {
+		if(results.isEmpty()) {
+			Map<Character, Integer> sorted = Sorting.getOrderedList(results);
+			List<Character> values = new ArrayList<>(sorted.keySet());
+			winner = values.get(0);
+		}
+		return winner;
 	}
 	
-	public List<String> returnOrder() {
-		List<String> keys = new ArrayList<>(results.keySet());
-		Collections.sort(keys);
-		return keys;
+	public List<Character> returnOrder() {
+		Map<Character, Integer> sorted = Sorting.getOrderedList(results);
+		return new ArrayList<>(sorted.keySet());
 	}
 	
 	private void calculateScores() {
-		for (String candidate: generator.createTest1()) {
-			if(results.containsKey(String.valueOf(candidate.charAt(0)))) {
-				Integer previousValue = results.get(String.valueOf(candidate.charAt(0)));
-				results.put(String.valueOf(candidate.charAt(0)), previousValue + 1);
+		Iterator<Map.Entry<String, Integer>> it = scores.entrySet().iterator();
+		while(it.hasNext()) {
+			Entry<String, Integer> pair = it.next();
+			if(results.containsKey(pair.getKey().charAt(0))) {
+				int previousValue = results.get(pair.getKey().charAt(0));
+				results.put(pair.getKey().charAt(0), previousValue + pair.getValue());
 			} else {
-				results.put("" + candidate.charAt(0), 1);
+				results.put(pair.getKey().charAt(0), pair.getValue());
 			}
 		}
 	}

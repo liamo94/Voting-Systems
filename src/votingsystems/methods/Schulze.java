@@ -2,18 +2,23 @@ package votingsystems.methods;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import votingsystems.utilities.Generator;
 
 public class Schulze extends VotingSystem {
 	
 	Generator generator;
-	List<String> votes = new ArrayList<>();
+	private int noOfCandidates;
+	Map<String, Integer> votes = new HashMap<>();
+	private int [][] pairWiseComparison = new int[noOfCandidates][noOfCandidates];
 	
 	public Schulze(Generator generator) {
 		this.generator = generator;
-		votes = this.generator.createTest1();
+		votes = generator.createTest();
+		noOfCandidates = generator.getNumberOfCandidates();
 		System.out.println(Arrays.asList(votes));
 	}
 	
@@ -21,11 +26,11 @@ public class Schulze extends VotingSystem {
 		System.out.println("Schulze method");
 	}
 	
-	public String returnWinner() {
-		return null;
+	public char returnWinner() {
+		return 'a';
 	}
 	
-	public List<String> returnOrder() {
+	public List<Character> returnOrder() {
 		return null;
 	}
 	

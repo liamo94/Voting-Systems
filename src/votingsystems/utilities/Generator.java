@@ -1,7 +1,9 @@
 package votingsystems.utilities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Generator {
 	
@@ -25,6 +27,16 @@ public class Generator {
 			votes.add("CEDABF");
 		for(int n = 0; n < 900; n++)
 			votes.add("CEBDAF");
+		return votes;
+	}
+	
+	public Map<String, Integer> createTest(){
+		noOfCandidates = 6;
+		Map<String, Integer> votes = new HashMap<>();
+		votes.put("ABCDEF", 5100);
+		votes.put("BCDEAF", 200);
+		votes.put("CEDABF", 20000);
+		votes.put("CEBDAF", 900);
 		return votes;
 	}
 
