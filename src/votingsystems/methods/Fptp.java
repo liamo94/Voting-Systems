@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import votingsystems.utilities.Generator;
-import votingsystems.utilities.Sorting;
+import votingsystems.utilities.SortingHelper;
 
 /**
  * Implementation for the First-Past-The-Post voting system
@@ -18,37 +18,29 @@ import votingsystems.utilities.Sorting;
  */
 public class Fptp extends VotingSystem {
 	
-	private Generator generator;
-	private Map<String, Integer> scores = new HashMap<>();
+	private Map<String, Integer> votes = new HashMap<>();
 	private Map<Character, Integer> results = new HashMap<>();
 	private char winner;
+	private List<Character> winnerOrder = new ArrayList<>();
 	
 	public Fptp(Generator generator) {
-		this.generator = generator;
-		this.scores = this.generator.createTest();
+		this.votes = generator.createTest();
 	}
 	
 	public void run() {
 		calculateScores();
-		System.out.println(results);
 	}
 	
-	public char returnWinner() {
-		if(results.isEmpty()) {
-			Map<Character, Integer> sorted = Sorting.getOrderedList(results);
-			List<Character> values = new ArrayList<>(sorted.keySet());
-			winner = values.get(0);
-		}
+	public char getWinner() {
 		return winner;
 	}
 	
-	public List<Character> returnOrder() {
-		Map<Character, Integer> sorted = Sorting.getOrderedList(results);
-		return new ArrayList<>(sorted.keySet());
+	public List<Character> getWinnigOrder() {
+		return winnerOrder;
 	}
 	
 	private void calculateScores() {
-		Iterator<Map.Entry<String, Integer>> it = scores.entrySet().iterator();
+		Iterator<Map.Entry<String, Integer>> it = votes.entrySet().iterator();
 		while(it.hasNext()) {
 			Entry<String, Integer> pair = it.next();
 			if(results.containsKey(pair.getKey().charAt(0))) {
@@ -58,7 +50,13 @@ public class Fptp extends VotingSystem {
 				results.put(pair.getKey().charAt(0), pair.getValue());
 			}
 		}
+		findWinners();
 	}
 	
+	private void findWinners() {
+		Map<Character, Integer> sorted = SortingHelper.getOrderedList(results);
+		winnerOrder = new ArrayList<>(sorted.keySet());
+		winner = winnerOrder.get(0);
+	}
 
 }
