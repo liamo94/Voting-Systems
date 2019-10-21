@@ -9,8 +9,8 @@ import votingsystems.utilities.Generator;
 import votingsystems.utilities.SortingHelper;
 import votingsystems.utilities.VotingHelper;
 
-public class Schulze extends VotingSystem {
-	
+public class Pairwise extends VotingSystem {
+
 	Generator generator;
 	Map<String, Integer> votes = new HashMap<>();
 	private List<Character> candidates = new ArrayList<>();
@@ -19,7 +19,7 @@ public class Schulze extends VotingSystem {
 	private List<Character> winnerOrder = new ArrayList<>();
 	private char winner;
 	
-	public Schulze(Generator generator) {
+	public Pairwise(Generator generator) {
 		this.generator = generator;
 		votes = generator.getVotes();
 		numberOfCandidates = generator.getNumberOfCandidates();
@@ -36,19 +36,20 @@ public class Schulze extends VotingSystem {
 	public char getWinner() {
 		return winner;
 	}
-	
+
 	public List<Character> getWinningOrder() {
 		return winnerOrder;
 	}
-	
+
 	private void findWinners() {
 		Map<Character, Integer> sorted = SortingHelper.getOrderedList(results);
 		winnerOrder = new ArrayList<>(sorted.keySet());
 		winner = winnerOrder.get(0);
+		
 	}
-	
+
 	private void calculateScores() {
-		int [][] winningMatrix = calculateStrongestPaths(VotingHelper.fillPairWise(votes, candidates, numberOfCandidates));
+		int [][] winningMatrix = VotingHelper.fillPairWise(votes, candidates, numberOfCandidates);
 		int previousValue = 0;
 		for (int i = 0; i < numberOfCandidates - 1; i++) {
 			for (int j = i + 1; j < numberOfCandidates; j++) {
@@ -64,30 +65,6 @@ public class Schulze extends VotingSystem {
 				}
 			}
 		}
-	}
-	
-	private int[][] calculateStrongestPaths(int[][] pairwiseComparison) {
-		int [][] strongestPath = new int[numberOfCandidates][numberOfCandidates];
-		for (int i = 0; i < numberOfCandidates; i++) {
-			for (int j = 0; j < numberOfCandidates; j++) {
-				if (i != j) {
-					strongestPath[i][j] = pairwiseComparison[i][j] > pairwiseComparison[j][i] ?
-							pairwiseComparison[i][j] :  0;
-				}
-			}
-		}
-		for (int i = 0; i < numberOfCandidates; i++) {
-			for (int j = 0; j < numberOfCandidates; j++) {
-				if (i != j) {
-					for (int k = 0; k < numberOfCandidates; k++) {
-						if (i != k && j != k){
-							strongestPath[j][k] = Math.max(strongestPath[j][k], (Math.min(strongestPath[j][i], strongestPath[i][k])));
-						}
-					}
-				}
-			}
-		}
-		return strongestPath;
 	}
 
 }

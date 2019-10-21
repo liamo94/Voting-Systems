@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 
 import votingsystems.utilities.Generator;
 
-class SchulzeTest {
+class CopelandsTest {
 	
 	private Generator generator;
-	private VotingSystem schulze;
+	private VotingSystem copelands;
 	
 	@BeforeEach
 	void setUp() {
@@ -21,23 +21,23 @@ class SchulzeTest {
 	}
 
 	@Test
-	void testSchulzeDis() {
+	void testCopelandsDis() {
 		generator.createDisTest();
-		schulze = new Schulze(generator);
-		schulze.run();
-		List<Character> winners = Arrays.asList('C', 'B', 'E', 'A', 'D');
-		assertEquals(schulze.getWinningOrder(), winners);
-		assertEquals(schulze.getWinner(), 'C');
+		copelands = new Copelands(generator);
+		copelands.run();
+		List<Character> winners = Arrays.asList('C', 'A', 'B', 'E', 'D');
+		assertEquals(copelands.getWinningOrder(), winners);
+		assertEquals(copelands.getWinner(), 'C');
 	}
 	
 	@Test
-	void testSchulzeIncomplete() {
+	void testCopelandsIncomplete() {
 		generator.createSomeIncompleteTest();
-		schulze = new Schulze(generator);
-		schulze.run();
+		copelands = new Copelands(generator);
+		copelands.run();
 		List<Character> winners = Arrays.asList('E', 'B', 'C', 'A', 'D');
-		assertEquals(schulze.getWinningOrder(), winners);
-		assertEquals(schulze.getWinner(), 'E');
+		assertEquals(copelands.getWinningOrder(), winners);
+		assertEquals(copelands.getWinner(), 'E');
 	}
 
 }

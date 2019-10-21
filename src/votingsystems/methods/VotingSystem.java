@@ -6,6 +6,6 @@ public abstract class VotingSystem {
 	
 	public abstract void run();
 	public abstract char getWinner();
-	public abstract List<Character> getWinnigOrder();
+	public abstract List<Character> getWinningOrder();
 
 }

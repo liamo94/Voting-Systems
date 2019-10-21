@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 
 import votingsystems.utilities.Generator;
 
-class SchulzeTest {
+class PairwiseTest {
 	
 	private Generator generator;
-	private VotingSystem schulze;
+	private VotingSystem pairwise;
 	
 	@BeforeEach
 	void setUp() {
@@ -21,23 +21,23 @@ class SchulzeTest {
 	}
 
 	@Test
-	void testSchulzeDis() {
+	void testCopelandsDis() {
 		generator.createDisTest();
-		schulze = new Schulze(generator);
-		schulze.run();
-		List<Character> winners = Arrays.asList('C', 'B', 'E', 'A', 'D');
-		assertEquals(schulze.getWinningOrder(), winners);
-		assertEquals(schulze.getWinner(), 'C');
+		pairwise = new Pairwise(generator);
+		pairwise.run();
+		List<Character> winners = Arrays.asList('C', 'A', 'B', 'E', 'D');
+		assertEquals(pairwise.getWinningOrder(), winners);
+		assertEquals(pairwise.getWinner(), 'C');
 	}
 	
 	@Test
-	void testSchulzeIncomplete() {
+	void testCopelandsIncomplete() {
 		generator.createSomeIncompleteTest();
-		schulze = new Schulze(generator);
-		schulze.run();
+		pairwise = new Pairwise(generator);
+		pairwise.run();
 		List<Character> winners = Arrays.asList('E', 'B', 'C', 'A', 'D');
-		assertEquals(schulze.getWinningOrder(), winners);
-		assertEquals(schulze.getWinner(), 'E');
+		assertEquals(pairwise.getWinningOrder(), winners);
+		assertEquals(pairwise.getWinner(), 'E');
 	}
 
 }
