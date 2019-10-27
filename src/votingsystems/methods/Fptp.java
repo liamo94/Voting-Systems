@@ -56,7 +56,7 @@ public class Fptp extends VotingSystem {
 	private void findWinners() {
 		Map<Character, Integer> sorted = SortingHelper.getOrderedList(results);
 		winnerOrder = new ArrayList<>(sorted.keySet());
-		winner = winnerOrder.get(0);
+		winner = winnerOrder.isEmpty() ? 0 : winnerOrder.get(0);
 	}
 
 }

@@ -1,7 +1,6 @@
 package votingsystems.methods;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -15,7 +14,6 @@ public class BordaCount extends VotingSystem {
 
 	private Map<String, Integer> votes = new HashMap<>();
 	private Map<Character, Integer> results = new HashMap<>();
-	private List<Character> candidates = new ArrayList<>();
 	private int numberOfCandidates;
 	private char winner;
 	private List<Character> winnerOrder = new ArrayList<>();
@@ -24,7 +22,6 @@ public class BordaCount extends VotingSystem {
 		this.votes = generator.getVotes();
 		votes = generator.getVotes();
 		numberOfCandidates = generator.getNumberOfCandidates();
-		candidates = SortingHelper.getCandidates(numberOfCandidates);
 	}
 	
 	public void run() {
@@ -52,7 +49,7 @@ public class BordaCount extends VotingSystem {
 	private void findWinners() {
 		Map<Character, Integer> sorted = SortingHelper.getOrderedList(results);
 		winnerOrder = new ArrayList<>(sorted.keySet());
-		winner = winnerOrder.get(0);
+		winner = winnerOrder.isEmpty() ? '!' : winnerOrder.get(0);
 	}
 
 	public char getWinner() {

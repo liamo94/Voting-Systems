@@ -44,7 +44,7 @@ public class Schulze extends VotingSystem {
 	private void findWinners() {
 		Map<Character, Integer> sorted = SortingHelper.getOrderedList(results);
 		winnerOrder = new ArrayList<>(sorted.keySet());
-		winner = winnerOrder.get(0);
+		winner = winnerOrder.isEmpty() ? '!' : winnerOrder.get(0);
 	}
 	
 	private void calculateScores() {

@@ -7,6 +7,7 @@ import votingsystems.methods.Copelands;
 import votingsystems.methods.Fptp;
 import votingsystems.methods.Pairwise;
 import votingsystems.methods.Schulze;
+import votingsystems.methods.Stv;
 import votingsystems.methods.VotingSystem;
 import votingsystems.utilities.Generator;
 
@@ -19,7 +20,7 @@ public class Main {
 //		VotingSystem schulze = new Schulze(generator);
 //		fptp.run();
 //		schulze.run();
-		VotingSystem copelands = new BordaCount(generator);
+		VotingSystem copelands = new Stv(generator);
 		copelands.run();
 //		System.out.println(fptp.getWinnigOrder());
 //		System.out.println(schulze.getWinnigOrder());
