@@ -12,34 +12,34 @@ import votingsystems.utilities.Generator;
 import votingsystems.utilities.TestCases;
 
 class FptpTest {
-	
-	private Generator generator;
-	private VotingSystem fptp;
-	
-	@BeforeEach
-	void setUp() {
-		generator = new Generator();
-	}
+    
+    private Generator generator;
+    private VotingSystem fptp;
+    
+    @BeforeEach
+    void setUp() {
+        generator = new Generator();
+    }
 
-	@Test
-	void testFptp() {
-		generator.runTest(TestCases.DISSERTATION_EXAMPLE);
-		fptp = new Fptp(generator);
-		fptp.run();
-		List<Character> winners = Arrays.asList('E', 'B', 'C', 'A', 'D');
-		assertEquals(fptp.getWinningOrder(), winners);
-		assertEquals(fptp.getWinner(), 'E');
-	}
-	
-	@Test
-	void testFptpIncomplete() {
-		generator.runTest(TestCases.INCOMPLETE_BALLOTS);
-		fptp = new Fptp(generator);
-		fptp.run();
-		List<Character> winners = Arrays.asList('E', 'C', 'A', 'D', 'B');
-		assertEquals(fptp.getWinningOrder(), winners);
-		assertEquals(fptp.getWinner(), 'E');
-	}
+    @Test
+    void testFptp() {
+        generator.runTest(TestCases.DISSERTATION_EXAMPLE);
+        fptp = new Fptp(generator);
+        fptp.run();
+        List<Character> winners = Arrays.asList('E', 'B', 'C', 'A', 'D');
+        assertEquals(fptp.getWinningOrder(), winners);
+        assertEquals(fptp.getWinner(), 'E');
+    }
+    
+    @Test
+    void testFptpIncomplete() {
+        generator.runTest(TestCases.INCOMPLETE_BALLOTS);
+        fptp = new Fptp(generator);
+        fptp.run();
+        List<Character> winners = Arrays.asList('E', 'C', 'A', 'D', 'B');
+        assertEquals(fptp.getWinningOrder(), winners);
+        assertEquals(fptp.getWinner(), 'E');
+    }
 
 
 }

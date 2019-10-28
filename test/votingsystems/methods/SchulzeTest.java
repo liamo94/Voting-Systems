@@ -12,33 +12,33 @@ import votingsystems.utilities.Generator;
 import votingsystems.utilities.TestCases;
 
 class SchulzeTest {
-	
-	private Generator generator;
-	private VotingSystem schulze;
-	
-	@BeforeEach
-	void setUp() {
-		generator = new Generator();
-	}
+    
+    private Generator generator;
+    private VotingSystem schulze;
+    
+    @BeforeEach
+    void setUp() {
+        generator = new Generator();
+    }
 
-	@Test
-	void testSchulzeDis() {
-		generator.runTest(TestCases.DISSERTATION_EXAMPLE);
-		schulze = new Schulze(generator);
-		schulze.run();
-		List<Character> winners = Arrays.asList('C', 'B', 'E', 'A', 'D');
-		assertEquals(schulze.getWinningOrder(), winners);
-		assertEquals(schulze.getWinner(), 'C');
-	}
-	
-	@Test
-	void testSchulzeIncomplete() {
-		generator.runTest(TestCases.INCOMPLETE_BALLOTS);
-		schulze = new Schulze(generator);
-		schulze.run();
-		List<Character> winners = Arrays.asList('E', 'B', 'C', 'A', 'D');
-		assertEquals(schulze.getWinningOrder(), winners);
-		assertEquals(schulze.getWinner(), 'E');
-	}
+    @Test
+    void testSchulzeDis() {
+        generator.runTest(TestCases.DISSERTATION_EXAMPLE);
+        schulze = new Schulze(generator);
+        schulze.run();
+        List<Character> winners = Arrays.asList('C', 'B', 'E', 'A', 'D');
+        assertEquals(schulze.getWinningOrder(), winners);
+        assertEquals(schulze.getWinner(), 'C');
+    }
+    
+    @Test
+    void testSchulzeIncomplete() {
+        generator.runTest(TestCases.INCOMPLETE_BALLOTS);
+        schulze = new Schulze(generator);
+        schulze.run();
+        List<Character> winners = Arrays.asList('E', 'B', 'C', 'A', 'D');
+        assertEquals(schulze.getWinningOrder(), winners);
+        assertEquals(schulze.getWinner(), 'E');
+    }
 
 }
