@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 import votingsystems.utilities.Generator;
 import votingsystems.utilities.TestCases;
 
-class BordaCountTest {
+class LiamsMethod1Test {
 	
 	private Generator generator;
-	private VotingSystem bordaCount;
+	private VotingSystem liamsMethod1;
 	
 	@BeforeEach
 	void setUp() {
@@ -22,23 +22,24 @@ class BordaCountTest {
 	}
 
 	@Test
-	void testBordaCountDis() {
+	void testLiamsMethod1() {
 		generator.runTest(TestCases.DISSERTATION_EXAMPLE);
-		bordaCount = new BordaCount(generator);
-		bordaCount.run();
+		liamsMethod1 = new LiamsMethod1(generator);
+		liamsMethod1.run();
 		List<Character> winners = Arrays.asList('C', 'B', 'A', 'E', 'D');
-		assertEquals(bordaCount.getWinningOrder(), winners);
-		assertEquals(bordaCount.getWinner(), 'C');
+		assertEquals(liamsMethod1.getWinningOrder(), winners);
+		assertEquals(liamsMethod1.getWinner(), 'C');
 	}
 	
 	@Test
-	void testBordaCountIncomplete() {
+	void testLiamsMethod1Incomplete() {
 		generator.runTest(TestCases.INCOMPLETE_BALLOTS);
-		bordaCount = new BordaCount(generator);
-		bordaCount.run();
-		List<Character> winners = Arrays.asList('E', 'B', 'A', 'D', 'C');
-		assertEquals(bordaCount.getWinningOrder(), winners);
-		assertEquals(bordaCount.getWinner(), 'E');
+		liamsMethod1 = new LiamsMethod1(generator);
+		liamsMethod1.run();
+		List<Character> winners = Arrays.asList('E', 'B', 'A', 'C', 'D');
+		assertEquals(liamsMethod1.getWinningOrder(), winners);
+		assertEquals(liamsMethod1.getWinner(), 'E');
 	}
+
 
 }

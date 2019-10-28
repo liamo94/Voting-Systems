@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 import votingsystems.utilities.Generator;
 import votingsystems.utilities.TestCases;
 
-class FptpTest {
+class StvTest {
 	
 	private Generator generator;
-	private VotingSystem fptp;
+	private VotingSystem stv;
 	
 	@BeforeEach
 	void setUp() {
@@ -22,23 +22,23 @@ class FptpTest {
 	}
 
 	@Test
-	void testFptp() {
+	void testStv() {
 		generator.runTest(TestCases.DISSERTATION_EXAMPLE);
-		fptp = new Fptp(generator);
-		fptp.run();
-		List<Character> winners = Arrays.asList('E', 'B', 'C', 'A', 'D');
-		assertEquals(fptp.getWinningOrder(), winners);
-		assertEquals(fptp.getWinner(), 'E');
+		stv = new Stv(generator);
+		stv.run();
+		List<Character> winners = Arrays.asList('E', 'C', 'B', 'A', 'D');
+		assertEquals(stv.getWinningOrder(), winners);
+		assertEquals(stv.getWinner(), 'E');
 	}
 	
 	@Test
-	void testFptpIncomplete() {
+	void testStvIncomplete() {
 		generator.runTest(TestCases.INCOMPLETE_BALLOTS);
-		fptp = new Fptp(generator);
-		fptp.run();
-		List<Character> winners = Arrays.asList('E', 'C', 'A', 'D', 'B');
-		assertEquals(fptp.getWinningOrder(), winners);
-		assertEquals(fptp.getWinner(), 'E');
+		stv = new Stv(generator);
+		stv.run();
+		List<Character> winners = Arrays.asList('E', 'D', 'C', 'A', 'B');
+		assertEquals(stv.getWinningOrder(), winners);
+		assertEquals(stv.getWinner(), 'E');
 	}
 
 

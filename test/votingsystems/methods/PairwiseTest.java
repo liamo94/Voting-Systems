@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import votingsystems.utilities.Generator;
+import votingsystems.utilities.TestCases;
 
 class PairwiseTest {
 	
@@ -22,7 +23,7 @@ class PairwiseTest {
 
 	@Test
 	void testCopelandsDis() {
-		generator.createDisTest();
+		generator.runTest(TestCases.DISSERTATION_EXAMPLE);
 		pairwise = new Pairwise(generator);
 		pairwise.run();
 		List<Character> winners = Arrays.asList('C', 'A', 'B', 'E', 'D');
@@ -32,7 +33,7 @@ class PairwiseTest {
 	
 	@Test
 	void testCopelandsIncomplete() {
-		generator.createSomeIncompleteTest();
+		generator.runTest(TestCases.INCOMPLETE_BALLOTS);
 		pairwise = new Pairwise(generator);
 		pairwise.run();
 		List<Character> winners = Arrays.asList('E', 'B', 'C', 'A', 'D');

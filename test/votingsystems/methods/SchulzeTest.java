@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import votingsystems.utilities.Generator;
+import votingsystems.utilities.TestCases;
 
 class SchulzeTest {
 	
@@ -22,7 +23,7 @@ class SchulzeTest {
 
 	@Test
 	void testSchulzeDis() {
-		generator.createDisTest();
+		generator.runTest(TestCases.DISSERTATION_EXAMPLE);
 		schulze = new Schulze(generator);
 		schulze.run();
 		List<Character> winners = Arrays.asList('C', 'B', 'E', 'A', 'D');
@@ -32,7 +33,7 @@ class SchulzeTest {
 	
 	@Test
 	void testSchulzeIncomplete() {
-		generator.createSomeIncompleteTest();
+		generator.runTest(TestCases.INCOMPLETE_BALLOTS);
 		schulze = new Schulze(generator);
 		schulze.run();
 		List<Character> winners = Arrays.asList('E', 'B', 'C', 'A', 'D');

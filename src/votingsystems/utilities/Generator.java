@@ -19,7 +19,19 @@ public class Generator {
 		return votes;
 	}
 	
-	public Map<String, Integer> createTest(){
+	public Map<String, Integer> runTest(TestCases test) {
+		switch(test) {
+		case SIXCANDIDATES:
+			return createTest();
+		case DISSERTATION_EXAMPLE:
+			return createDisTest();
+		case INCOMPLETE_BALLOTS:
+			return createSomeIncompleteTest();
+		}
+		return createTest();
+	}
+	
+	private Map<String, Integer> createTest(){
 		votes.clear();
 		noOfCandidates = 6;
 		votes.put("ABCDEF", 5100);
@@ -32,7 +44,7 @@ public class Generator {
 	/**
 	 * USED IN TESTING
 	 */
-	public Map<String, Integer> createDisTest() {
+	private Map<String, Integer> createDisTest() {
 		votes.clear();
 		noOfCandidates = 5;
 		votes.put("ACDBE", 8);
@@ -49,7 +61,7 @@ public class Generator {
 	/**
 	 * USED IN TESTING
 	 */
-	public Map<String, Integer> createSomeIncompleteTest() {
+	private Map<String, Integer> createSomeIncompleteTest() {
 		votes.clear();
 		noOfCandidates = 5;
 		votes.put("AE", 8);
@@ -63,8 +75,4 @@ public class Generator {
 		return votes;
 	}
 
-}
-
-enum TestCases {
-	SIXCANDIDATES
 }

@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 import votingsystems.utilities.Generator;
 import votingsystems.utilities.TestCases;
 
-class CopelandsTest {
+class LiamsMethod2Test {
 	
 	private Generator generator;
-	private VotingSystem copelands;
+	private VotingSystem liamsMethod2;
 	
 	@BeforeEach
 	void setUp() {
@@ -22,23 +22,24 @@ class CopelandsTest {
 	}
 
 	@Test
-	void testCopelandsDis() {
+	void testLiamsMethod2() {
 		generator.runTest(TestCases.DISSERTATION_EXAMPLE);
-		copelands = new Copelands(generator);
-		copelands.run();
+		liamsMethod2 = new LiamsMethod2(generator);
+		liamsMethod2.run();
 		List<Character> winners = Arrays.asList('C', 'A', 'B', 'E', 'D');
-		assertEquals(copelands.getWinningOrder(), winners);
-		assertEquals(copelands.getWinner(), 'C');
+		assertEquals(liamsMethod2.getWinningOrder(), winners);
+		assertEquals(liamsMethod2.getWinner(), 'C');
 	}
 	
 	@Test
-	void testCopelandsIncomplete() {
+	void testLiamsMethod2Incomplete() {
 		generator.runTest(TestCases.INCOMPLETE_BALLOTS);
-		copelands = new Copelands(generator);
-		copelands.run();
-		List<Character> winners = Arrays.asList('E', 'B', 'C', 'A', 'D');
-		assertEquals(copelands.getWinningOrder(), winners);
-		assertEquals(copelands.getWinner(), 'E');
+		liamsMethod2 = new LiamsMethod2(generator);
+		liamsMethod2.run();
+		List<Character> winners = Arrays.asList('E', 'B', 'A', 'C', 'D');
+		assertEquals(liamsMethod2.getWinningOrder(), winners);
+		assertEquals(liamsMethod2.getWinner(), 'E');
 	}
+
 
 }
