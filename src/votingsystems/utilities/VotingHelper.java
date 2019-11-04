@@ -16,17 +16,17 @@ public class VotingHelper {
         int voteLength;
         String vote;
         while(it.hasNext()) {
-            Entry<String, Integer> pair = it.next();
-            voteLength = pair.getKey().length();
-            vote = pair.getKey();
+            Entry<String, Integer> ballot = it.next();
+            voteLength = ballot.getKey().length();
+            vote = ballot.getKey();
             for(int i = 0; i < voteLength - 1; i++) {
                 for(int j = i + 1; j < voteLength; j++) {
-                    pairwiseComparison[candidates.indexOf(vote.charAt(i))][candidates.indexOf(vote.charAt(j))] += pair.getValue();
+                    pairwiseComparison[candidates.indexOf(vote.charAt(i))][candidates.indexOf(vote.charAt(j))] += ballot.getValue();
                 }
             }
             for(char candidate: vote.toCharArray()) {
                 for(char unselected: findUnselectedCandidates(vote, candidates)) {
-                    pairwiseComparison[candidates.indexOf(candidate)][candidates.indexOf(unselected)] += pair.getValue();
+                    pairwiseComparison[candidates.indexOf(candidate)][candidates.indexOf(unselected)] += ballot.getValue();
                 }
             }
 
@@ -42,6 +42,14 @@ public class VotingHelper {
             }
         }
         return unusedCharacters;
+    }
+    
+    public static List<Character> getCandidates(int noOfCandidates) {
+        List<Character> candidates = new ArrayList<>();
+        for(int i = 65; i < 65 + noOfCandidates; i++) {
+            candidates.add((char)i);
+        }
+        return candidates;
     }
 
 }

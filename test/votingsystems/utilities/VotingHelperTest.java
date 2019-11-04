@@ -23,7 +23,7 @@ class VotingHelperTest {
     void testFillPairWise() {
         int numberOfCandidates = 5;
         Map<String, Integer> votes = generator.runTest(TestCases.DISSERTATION_EXAMPLE);
-        List<Character> candidates = SortingHelper.getCandidates(numberOfCandidates);
+        List<Character> candidates = VotingHelper.getCandidates(numberOfCandidates);
         int[][] pairwise = {
                 {0, 27, 19, 35, 17},
                 {22, 0, 24, 33, 28},

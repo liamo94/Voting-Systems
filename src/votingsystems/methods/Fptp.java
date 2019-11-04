@@ -25,6 +25,7 @@ public class Fptp extends VotingSystem {
     
     public Fptp(Generator generator) {
         this.votes = generator.getVotes();
+        run();
     }
     
     public void run() {
@@ -42,12 +43,12 @@ public class Fptp extends VotingSystem {
     private void calculateScores() {
         Iterator<Map.Entry<String, Integer>> it = votes.entrySet().iterator();
         while(it.hasNext()) {
-            Entry<String, Integer> pair = it.next();
-            if (results.containsKey(pair.getKey().charAt(0))) {
-                int previousValue = results.get(pair.getKey().charAt(0));
-                results.put(pair.getKey().charAt(0), previousValue + pair.getValue());
+            Entry<String, Integer> ballot = it.next();
+            if (results.containsKey(ballot.getKey().charAt(0))) {
+                int previousValue = results.get(ballot.getKey().charAt(0));
+                results.put(ballot.getKey().charAt(0), previousValue + ballot.getValue());
             } else {
-                results.put(pair.getKey().charAt(0), pair.getValue());
+                results.put(ballot.getKey().charAt(0), ballot.getValue());
             }
         }
         findWinners();

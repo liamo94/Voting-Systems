@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 
 import votingsystems.utilities.Generator;
 import votingsystems.utilities.SortingHelper;
+import votingsystems.utilities.VotingHelper;
 
 public class LiamsMethod1 extends VotingSystem{
     
@@ -24,7 +25,8 @@ public class LiamsMethod1 extends VotingSystem{
         this.generator = generator;
         votes = generator.getVotes();
         numberOfCandidates = generator.getNumberOfCandidates();
-        candidates = SortingHelper.getCandidates(numberOfCandidates);
+        candidates = VotingHelper.getCandidates(numberOfCandidates);
+        run();
     }
     
     public void run() {
@@ -49,10 +51,10 @@ public class LiamsMethod1 extends VotingSystem{
         Iterator<Map.Entry<String, Integer>> it = votes.entrySet().iterator();
         int score = 0;
         while(it.hasNext()) {
-            Entry<String, Integer> pair = it.next();
-            for(int i = 0; i < pair.getKey().length(); i++) {
-                score = (pair.getValue() * (numberOfCandidates - i)) - (pair.getValue() * i);
-                results.put(pair.getKey().charAt(i), results.get(pair.getKey().charAt(i)) + score);
+            Entry<String, Integer> ballot = it.next();
+            for(int i = 0; i < ballot.getKey().length(); i++) {
+                score = (ballot.getValue() * (numberOfCandidates - i)) - (ballot.getValue() * i);
+                results.put(ballot.getKey().charAt(i), results.get(ballot.getKey().charAt(i)) + score);
             }
         }
         findWinners();

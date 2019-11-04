@@ -25,7 +25,6 @@ class BordaCountTest {
     void testBordaCountDis() {
         generator.runTest(TestCases.DISSERTATION_EXAMPLE);
         bordaCount = new BordaCount(generator);
-        bordaCount.run();
         List<Character> winners = Arrays.asList('C', 'B', 'A', 'E', 'D');
         assertEquals(bordaCount.getWinningOrder(), winners);
         assertEquals(bordaCount.getWinner(), 'C');
@@ -35,7 +34,6 @@ class BordaCountTest {
     void testBordaCountIncomplete() {
         generator.runTest(TestCases.INCOMPLETE_BALLOTS);
         bordaCount = new BordaCount(generator);
-        bordaCount.run();
         List<Character> winners = Arrays.asList('E', 'B', 'A', 'D', 'C');
         assertEquals(bordaCount.getWinningOrder(), winners);
         assertEquals(bordaCount.getWinner(), 'E');

@@ -25,7 +25,6 @@ class FptpTest {
     void testFptp() {
         generator.runTest(TestCases.DISSERTATION_EXAMPLE);
         fptp = new Fptp(generator);
-        fptp.run();
         List<Character> winners = Arrays.asList('E', 'B', 'C', 'A', 'D');
         assertEquals(fptp.getWinningOrder(), winners);
         assertEquals(fptp.getWinner(), 'E');
@@ -35,7 +34,6 @@ class FptpTest {
     void testFptpIncomplete() {
         generator.runTest(TestCases.INCOMPLETE_BALLOTS);
         fptp = new Fptp(generator);
-        fptp.run();
         List<Character> winners = Arrays.asList('E', 'C', 'A', 'D', 'B');
         assertEquals(fptp.getWinningOrder(), winners);
         assertEquals(fptp.getWinner(), 'E');

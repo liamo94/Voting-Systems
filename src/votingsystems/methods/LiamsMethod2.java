@@ -23,7 +23,8 @@ public class LiamsMethod2 extends VotingSystem{
         this.generator = generator;
         votes = generator.getVotes();
         numberOfCandidates = generator.getNumberOfCandidates();
-        candidates = SortingHelper.getCandidates(numberOfCandidates);
+        candidates = VotingHelper.getCandidates(numberOfCandidates);
+        run();
     }
     
     public void run() {
@@ -45,7 +46,6 @@ public class LiamsMethod2 extends VotingSystem{
         Map<Character, Integer> sorted = SortingHelper.getOrderedList(results);
         winnerOrder = new ArrayList<>(sorted.keySet());
         winner = winnerOrder.isEmpty() ? '!' : winnerOrder.get(0);
-        
     }
 
     private void calculateScores() {

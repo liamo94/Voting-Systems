@@ -25,7 +25,6 @@ class LiamsMethod2Test {
     void testLiamsMethod2() {
         generator.runTest(TestCases.DISSERTATION_EXAMPLE);
         liamsMethod2 = new LiamsMethod2(generator);
-        liamsMethod2.run();
         List<Character> winners = Arrays.asList('C', 'A', 'B', 'E', 'D');
         assertEquals(liamsMethod2.getWinningOrder(), winners);
         assertEquals(liamsMethod2.getWinner(), 'C');
@@ -35,11 +34,9 @@ class LiamsMethod2Test {
     void testLiamsMethod2Incomplete() {
         generator.runTest(TestCases.INCOMPLETE_BALLOTS);
         liamsMethod2 = new LiamsMethod2(generator);
-        liamsMethod2.run();
         List<Character> winners = Arrays.asList('E', 'B', 'A', 'C', 'D');
         assertEquals(liamsMethod2.getWinningOrder(), winners);
         assertEquals(liamsMethod2.getWinner(), 'E');
     }
-
 
 }

@@ -25,7 +25,6 @@ class CopelandsTest {
     void testCopelandsDis() {
         generator.runTest(TestCases.DISSERTATION_EXAMPLE);
         copelands = new Copelands(generator);
-        copelands.run();
         List<Character> winners = Arrays.asList('C', 'A', 'B', 'E', 'D');
         assertEquals(copelands.getWinningOrder(), winners);
         assertEquals(copelands.getWinner(), 'C');
@@ -35,7 +34,6 @@ class CopelandsTest {
     void testCopelandsIncomplete() {
         generator.runTest(TestCases.INCOMPLETE_BALLOTS);
         copelands = new Copelands(generator);
-        copelands.run();
         List<Character> winners = Arrays.asList('E', 'B', 'C', 'A', 'D');
         assertEquals(copelands.getWinningOrder(), winners);
         assertEquals(copelands.getWinner(), 'E');

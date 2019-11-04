@@ -14,7 +14,7 @@ class SortingHelperTest {
     @Test
     void testCandiates() {
         List<Character> candidates = Arrays.asList('A', 'B', 'C', 'D','E');
-        List<Character> testCandidates = SortingHelper.getCandidates(5);
+        List<Character> testCandidates = VotingHelper.getCandidates(5);
         assertEquals(candidates, testCandidates);
     }
     
@@ -31,6 +31,4 @@ class SortingHelperTest {
         assertEquals(SortingHelper.getOrderedList(results), orderedResults);
     }
     
-    
-
 }

@@ -17,16 +17,13 @@ import votingsystems.utilities.TestCases;
 public class Cli {
     
     public void run() {
-        Generator generator = new Generator();
-        generator.runTest(TestCases.DISSERTATION_EXAMPLE);
+        Generator generator = new Generator(TestCases.DISSERTATION_EXAMPLE);
         System.out.println("Running voting systems");
         Scanner user_input = new Scanner(System.in);
         Scanner keyboard = new Scanner(System.in);
         int choice = 0;
         while (choice != 10) {
-            System.out.println("**************************\n"+ 
-                    "* VOTING SYSTEMS PROJECT *\n"
-                    + "**************************");
+            System.out.println("***************** VOTING SYSTEMS PROJECT *****************");
             System.out
             .println("\nPlease select an option.\n\n1. Run All Methods\n2. Run FPTP\n3. Run Borda Count\n4. Run STV\n5. Run Schulze"
                     + "\n6. Run Copeland's\n7. Run Liam's Method 1\n8. Run Liam's Method 2\n9. About\n10. Quit");
@@ -79,10 +76,8 @@ public class Cli {
                     break;
 
                 case 10:
-                    System.out.println("");
-                    System.out.println("Exit complete.");
+                    System.out.println("\nExit complete.");
                     System.exit(0);
-
                     break;
 
                 default:
@@ -103,7 +98,6 @@ public class Cli {
     private void runFptp(Generator generator) {
         System.out.println("Running FPTP (First Past the Post)");
         VotingSystem fptp = new Fptp(generator);
-        fptp.run();
         System.out.printf("Winner is %s, winning order - ", fptp.getWinner());
         System.out.println(fptp.getWinningOrder());
     }
@@ -111,7 +105,6 @@ public class Cli {
     private void runSchulze(Generator generator) {
         System.out.println("Running Schulze");
         VotingSystem schulze = new Schulze(generator);
-        schulze.run();
         System.out.printf("Winner is %s, winning order - ", schulze.getWinner());
         System.out.println(schulze.getWinningOrder());
     }
@@ -119,7 +112,6 @@ public class Cli {
     private void runBorda(Generator generator) {
         System.out.println("Running Borda Count");
         VotingSystem borda = new BordaCount(generator);
-        borda.run();
         System.out.printf("Winner is %s, winning order - ", borda.getWinner());
         System.out.println(borda.getWinningOrder());
     }
@@ -127,7 +119,6 @@ public class Cli {
     private void runStv(Generator generator) {
         System.out.println("Running STV (Single Transferable Vote)");
         VotingSystem stv = new Stv(generator);
-        stv.run();
         System.out.printf("Winner is %s, winning order - ", stv.getWinner());
         System.out.println(stv.getWinningOrder());
     }
@@ -135,7 +126,6 @@ public class Cli {
     private void runCopelands(Generator generator) {
         System.out.println("Running Copelands Method");
         VotingSystem copelands = new Copelands(generator);
-        copelands.run();
         System.out.printf("Winner is %s, winning order - ", copelands.getWinner());
         System.out.println(copelands.getWinningOrder());
     }
@@ -143,7 +133,6 @@ public class Cli {
     private void runLiamsMethod1(Generator generator) {
         System.out.println("Running Liams Method 1");
         VotingSystem liamsMethod1 = new LiamsMethod1(generator);
-        liamsMethod1.run();
         System.out.printf("Winner is %s, winning order - ", liamsMethod1.getWinner());
         System.out.println(liamsMethod1.getWinningOrder());
     }
@@ -151,7 +140,6 @@ public class Cli {
     private void runLiamsMethod2(Generator generator) {
         System.out.println("Running Liams Method 2");
         VotingSystem liamsMethod2 = new LiamsMethod2(generator);
-        liamsMethod2.run();
         System.out.printf("Winner is %s, winning order - ", liamsMethod2.getWinner());
         System.out.println(liamsMethod2.getWinningOrder());
     }

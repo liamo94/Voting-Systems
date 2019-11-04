@@ -27,10 +27,12 @@ public class Stv extends VotingSystem{
     public Stv(Generator generator) {
         this.generator = generator;
         votes = generator.getVotes();
+        run();
     }
     
     public void run() {
         if (generator.getNumberOfCandidates() > 0) {
+            winnerOrder.clear();
             calculateScores();
             findWinners();
         }
@@ -51,17 +53,17 @@ public class Stv extends VotingSystem{
     private void findFirstPlaces() {
         Iterator<Map.Entry<String, Integer>> it = votes.entrySet().iterator();
         while (it.hasNext()) {
-            Entry<String, Integer> pair = it.next();
-            if (results.containsKey(pair.getKey().charAt(0))) {
-                int previousValue = results.get(pair.getKey().charAt(0));
-                results.put(pair.getKey().charAt(0), previousValue + pair.getValue());
+            Entry<String, Integer> ballot = it.next();
+            if (results.containsKey(ballot.getKey().charAt(0))) {
+                int previousValue = results.get(ballot.getKey().charAt(0));
+                results.put(ballot.getKey().charAt(0), previousValue + ballot.getValue());
             } else {
-                results.put(pair.getKey().charAt(0), pair.getValue());
+                results.put(ballot.getKey().charAt(0), ballot.getValue());
             }
         }
     }
     
-    private void calculateScores()  {
+    private void calculateScores() {
         int quota = findQuota();
         findFirstPlaces();
         Map<Character, Integer> candidatesLeft = new HashMap<>(results);
@@ -93,9 +95,9 @@ public class Stv extends VotingSystem{
     private char canidateHitQuota(Map<Character, Integer> candidatesLeft, int quota) {
         Iterator<Map.Entry<Character, Integer>> it = candidatesLeft.entrySet().iterator();
         while (it.hasNext()) {
-            Entry<Character, Integer> pair = it.next();
-            if(pair.getValue() >= quota) {
-                return pair.getKey();
+            Entry<Character, Integer> ballot = it.next();
+            if (ballot.getValue() >= quota) {
+                return ballot.getKey();
             }
         }
         return '!';
@@ -107,19 +109,19 @@ public class Stv extends VotingSystem{
         Map<Character, Integer> candidatesToAllocate = new HashMap<>();
         Iterator<Map.Entry<String, Integer>> votesIt = votes.entrySet().iterator();
         while (votesIt.hasNext()) {
-            Entry<String, Integer> pair = votesIt.next();
-            if (pair.getKey().charAt(0) == canidate) {
+            Entry<String, Integer> ballot = votesIt.next();
+            if (ballot.getKey().charAt(0) == canidate) {
                 int index = 1;
                 while (true) {
-                    if (index >= pair.getKey().length()) {
+                    if (index >= ballot.getKey().length()) {
                         break;
-                    } if (candidatesLeft.containsKey(pair.getKey().charAt(index))) {
-                        totalVotes += pair.getValue();
-                        if (!candidatesToAllocate.containsKey(pair.getKey().charAt(index))) {
-                            candidatesToAllocate.put(pair.getKey().charAt(index), pair.getValue());
+                    } if (candidatesLeft.containsKey(ballot.getKey().charAt(index))) {
+                        totalVotes += ballot.getValue();
+                        if (!candidatesToAllocate.containsKey(ballot.getKey().charAt(index))) {
+                            candidatesToAllocate.put(ballot.getKey().charAt(index), ballot.getValue());
                         } else {
-                            int newValue = pair.getValue() + candidatesToAllocate.get(pair.getKey().charAt(index));
-                            candidatesToAllocate.put(pair.getKey().charAt(index), newValue);
+                            int newValue = ballot.getValue() + candidatesToAllocate.get(ballot.getKey().charAt(index));
+                            candidatesToAllocate.put(ballot.getKey().charAt(index), newValue);
                         }
                         break;
                     }
@@ -130,24 +132,24 @@ public class Stv extends VotingSystem{
         Iterator<Map.Entry<Character, Integer>> it = candidatesToAllocate.entrySet().iterator();
         int redistirbutedVote = 0;
         while (it.hasNext()) {
-            Entry<Character, Integer> pair = it.next();
-            redistirbutedVote =  (surplusVotes/totalVotes) * pair.getValue();
-            candidatesLeft.put(pair.getKey(), candidatesLeft.get(pair.getKey()) + redistirbutedVote);
+            Entry<Character, Integer> ballot = it.next();
+            redistirbutedVote =  (surplusVotes/totalVotes) * ballot.getValue();
+            candidatesLeft.put(ballot.getKey(), candidatesLeft.get(ballot.getKey()) + redistirbutedVote);
         }
     }
     
     private void reallocateLoserSeats(char canidate, Map<Character, Integer> candidatesLeft) {
         Iterator<Map.Entry<String, Integer>> it = votes.entrySet().iterator();
         while (it.hasNext()) {
-            Entry<String, Integer> pair = it.next();
-            if (pair.getKey().charAt(0) == canidate) {
+            Entry<String, Integer> ballot = it.next();
+            if (ballot.getKey().charAt(0) == canidate) {
                 int index = 1;
                 while (true) {
-                    if (index >= pair.getKey().length()) {
+                    if (index >= ballot.getKey().length()) {
                         break;
-                    } if (candidatesLeft.containsKey(pair.getKey().charAt(index))) {
-                        int newValue = pair.getValue() + candidatesLeft.get(pair.getKey().charAt(index));
-                        candidatesLeft.put(pair.getKey().charAt(index), newValue);
+                    } if (candidatesLeft.containsKey(ballot.getKey().charAt(index))) {
+                        int newValue = ballot.getValue() + candidatesLeft.get(ballot.getKey().charAt(index));
+                        candidatesLeft.put(ballot.getKey().charAt(index), newValue);
                         break;
                     }
                     index++;
@@ -160,8 +162,8 @@ public class Stv extends VotingSystem{
         int totalVotes = 0;
         Iterator<Map.Entry<String, Integer>> it = votes.entrySet().iterator();
         while (it.hasNext()) {
-            Entry<String, Integer> pair = it.next();
-            totalVotes += pair.getValue();
+            Entry<String, Integer> ballot = it.next();
+            totalVotes += ballot.getValue();
         }
         return totalVotes/2;
     }

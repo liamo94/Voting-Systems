@@ -22,6 +22,7 @@ public class BordaCount extends VotingSystem {
         this.votes = generator.getVotes();
         votes = generator.getVotes();
         numberOfCandidates = generator.getNumberOfCandidates();
+        run();
     }
     
     public void run() {
@@ -31,14 +32,14 @@ public class BordaCount extends VotingSystem {
     private void calculateScores() {
         Iterator<Map.Entry<String, Integer>> it = votes.entrySet().iterator();
         while(it.hasNext()) {
-            Entry<String, Integer> pair = it.next();
+            Entry<String, Integer> ballot = it.next();
             int score = numberOfCandidates;
-            for(int i = 0; i < pair.getKey().length(); i++) {
-                if (results.containsKey(pair.getKey().charAt(i))) {
-                    int previousValue = results.get(pair.getKey().charAt(i));
-                    results.put(pair.getKey().charAt(i), previousValue + (pair.getValue() * score));
+            for(int i = 0; i < ballot.getKey().length(); i++) {
+                if (results.containsKey(ballot.getKey().charAt(i))) {
+                    int previousValue = results.get(ballot.getKey().charAt(i));
+                    results.put(ballot.getKey().charAt(i), previousValue + (ballot.getValue() * score));
                 } else {
-                    results.put(pair.getKey().charAt(i), (pair.getValue() * score));
+                    results.put(ballot.getKey().charAt(i), (ballot.getValue() * score));
                 }
                 score--;
             }

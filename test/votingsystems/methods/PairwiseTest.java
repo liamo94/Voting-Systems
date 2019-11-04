@@ -25,7 +25,6 @@ class PairwiseTest {
     void testCopelandsDis() {
         generator.runTest(TestCases.DISSERTATION_EXAMPLE);
         pairwise = new Pairwise(generator);
-        pairwise.run();
         List<Character> winners = Arrays.asList('C', 'A', 'B', 'E', 'D');
         assertEquals(pairwise.getWinningOrder(), winners);
         assertEquals(pairwise.getWinner(), 'C');
@@ -35,7 +34,6 @@ class PairwiseTest {
     void testCopelandsIncomplete() {
         generator.runTest(TestCases.INCOMPLETE_BALLOTS);
         pairwise = new Pairwise(generator);
-        pairwise.run();
         List<Character> winners = Arrays.asList('E', 'B', 'C', 'A', 'D');
         assertEquals(pairwise.getWinningOrder(), winners);
         assertEquals(pairwise.getWinner(), 'E');

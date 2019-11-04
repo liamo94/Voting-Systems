@@ -23,7 +23,8 @@ public class Copelands extends VotingSystem{
         this.generator = generator;
         votes = generator.getVotes();
         numberOfCandidates = generator.getNumberOfCandidates();
-        candidates = SortingHelper.getCandidates(numberOfCandidates);
+        candidates = VotingHelper.getCandidates(numberOfCandidates);
+        run();
     }
     
     public void run() {

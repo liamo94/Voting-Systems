@@ -25,7 +25,6 @@ class SchulzeTest {
     void testSchulzeDis() {
         generator.runTest(TestCases.DISSERTATION_EXAMPLE);
         schulze = new Schulze(generator);
-        schulze.run();
         List<Character> winners = Arrays.asList('C', 'B', 'E', 'A', 'D');
         assertEquals(schulze.getWinningOrder(), winners);
         assertEquals(schulze.getWinner(), 'C');
@@ -35,7 +34,6 @@ class SchulzeTest {
     void testSchulzeIncomplete() {
         generator.runTest(TestCases.INCOMPLETE_BALLOTS);
         schulze = new Schulze(generator);
-        schulze.run();
         List<Character> winners = Arrays.asList('E', 'B', 'C', 'A', 'D');
         assertEquals(schulze.getWinningOrder(), winners);
         assertEquals(schulze.getWinner(), 'E');

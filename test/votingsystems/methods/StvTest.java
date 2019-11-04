@@ -25,7 +25,6 @@ class StvTest {
     void testStv() {
         generator.runTest(TestCases.DISSERTATION_EXAMPLE);
         stv = new Stv(generator);
-        stv.run();
         List<Character> winners = Arrays.asList('E', 'C', 'B', 'A', 'D');
         assertEquals(stv.getWinningOrder(), winners);
         assertEquals(stv.getWinner(), 'E');
@@ -35,7 +34,6 @@ class StvTest {
     void testStvIncomplete() {
         generator.runTest(TestCases.INCOMPLETE_BALLOTS);
         stv = new Stv(generator);
-        stv.run();
         List<Character> winners = Arrays.asList('E', 'D', 'C', 'A', 'B');
         assertEquals(stv.getWinningOrder(), winners);
         assertEquals(stv.getWinner(), 'E');

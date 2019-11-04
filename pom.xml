@@ -3,7 +3,7 @@
   <groupId>liamo94</groupId>
   <artifactId>Voting-Systems</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-    <name>Voting Systems</name>
+  <name>Voting Systems</name>
   
   <dependencies>
     <dependency>

@@ -1,8 +1,6 @@
 package votingsystems.utilities;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -18,12 +16,4 @@ public class SortingHelper {
         return sortedByCount;
     }
     
-    public static List<Character> getCandidates(int noOfCandidates) {
-        List<Character> candidates = new ArrayList<>();
-        for(int i = 65; i < 65 + noOfCandidates; i++) {
-            candidates.add((char)i);
-        }
-        return candidates;
-    }
-
 }
